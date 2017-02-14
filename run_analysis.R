@@ -27,4 +27,6 @@ names(y) <- "activity"
 CleanData <- cbind(Subject, Y, X)
 CleanData<-data.table(CleanData) ## here I used data.table package which I installed
 tidydata <- CleanData[,lapply(.SD, mean), by = 'SubjectID,activity']
-head(tidydata[order(SubjectID)][,c(1:4)], 12)
+tidydata <- tidydata[order(SubjectID)]
+write.table(tidydata, "tidydata.txt", row.name=FALSE)
+head(tidydata[,c(1:4)], 12)
